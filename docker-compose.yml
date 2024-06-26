@@ -1,0 +1,22 @@
+version: '3'
+services:
+  app-webserver:
+    image: app-webserver
+    container_name: app-webserver
+    build:
+      target: app-webserver
+    ports:
+      - 8080:80
+    environment:
+      APP_UPSTREAM: app:9000 # when deploy on ecs fargate then APP_UPSTREAM=127.0.0.1:9000
+  app:
+    image: app
+    container_name: app
+    build:
+      target: app
+    ports:
+      - 9000:9000
+    environment:
+      LOG_CHANNEL: errorlog # output php app error and other log to std error for container env
+      APP_KEY: base64:LKxI8gYO7MmRfvDbf3Z95xEeags+bNcxQx0CTepAOA4=
+      SESSION_DRIVER: array # in this sample don't use session so disable session
