@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'sqlite'),
+    'default' => env('DB_CONNECTION', 'in_memory'),
 
     /*
     |--------------------------------------------------------------------------
@@ -107,6 +107,12 @@ return [
             'prefix_indexes' => true,
             // 'encrypt' => env('DB_ENCRYPT', 'yes'),
             // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
+        ],
+
+        'in_memory' => [
+            'driver' => 'sqlite',
+            'database' => ':memory:', // In-memory database
+            'prefix' => '',
         ],
 
     ],
